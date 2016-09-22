@@ -8,6 +8,13 @@ var nodeArgs = process.argv;
 // Create an empty variable for holding the movie name
 var movieName = "";
 
+var spotify = require('spotify');
+
+var song= "";
+
+
+
+
 
 if(process.argv[2]=="movie-this"){
 
@@ -46,13 +53,43 @@ request(queryUrl, function (error, response, body) {
 	// If the request is successful (i.e. if the response status code is 200)
 	if (!error && response.statusCode == 200) {
 
-		
-		console.log(body)
+		   var json = JSON.parse(body);
+
+	   console.log("Title: " +json.Title);
+	   console.log("Year: " +json.Year); 
+	   console.log("IMDB Rating: " +json.imdbRating); 
+	   console.log("Country: " +json.Country); 
+	   console.log("Language: " +json.Language); 
+	   console.log("Plot: " +json.Plot);
+	   console.log("Actors: " +json.Actors); 
 	}
 });
 }
 
-else{
+else if (process.argv[2]=="spotify-this-song"){
 
-console.log("write more code!")
+	for (var i=3; i<nodeArgs.length; i++){
+
+	if (i>3 && i< nodeArgs.length){
+
+		song = song + "+" + nodeArgs[i];
+
+	}
+
+	else {
+
+		song = song + nodeArgs[i];
+	}
+}
+
+spotify.search({ type: 'track', query: song }, function(err, data) {
+    if ( err ) {
+        console.log('Error occurred: ' + err);
+        return;
+    }
+
+    console.log(data);
+
+});
+
 };
