@@ -87,8 +87,8 @@ spotify.search({ type: 'track', query: song }, function(err, data) {
         console.log('Error occurred: ' + err);
         return;
     }
-
-    console.log(data);
+ 
+   console.log("Artist Name: " + data.tracks.items[0].artists[0].name);
 
 });
 
