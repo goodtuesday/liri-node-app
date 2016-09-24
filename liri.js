@@ -1,4 +1,3 @@
-
 // Include the request npm package (Don't forget to run "npm install request" in this folder first!)
 var request = require('request');
 
@@ -12,9 +11,9 @@ var spotify = require('spotify');
 
 var song= "";
 
+var Twitter = require('twitter');
 
-
-
+var fs = require('fs');
 
 if(process.argv[2]=="movie-this"){
 
@@ -36,10 +35,10 @@ for (var i=3; i<nodeArgs.length; i++){
 	}
 }
 
-// if no input, returns imdb data for Mr Nobody
+// if no input, returns imdb data for Mr. Nobody!
 if (movieName==""){
 
-	movieName="mr nobody";
+	movieName="mr Nobody";
 }
 
 // Then run a request to the OMDB API with the movie specified 
@@ -66,6 +65,8 @@ request(queryUrl, function (error, response, body) {
 });
 }
 
+
+// if the second element of node arg is "spitify-this-song" 
 else if (process.argv[2]=="spotify-this-song"){
 
 	for (var i=3; i<nodeArgs.length; i++){
@@ -88,8 +89,36 @@ spotify.search({ type: 'track', query: song }, function(err, data) {
         return;
     }
  
+
    console.log("Artist Name: " + data.tracks.items[0].artists[0].name);
 
 });
+}
+
+// if the second element of node arg is "my-tweets" 
+
+else if(process.argv[2]=="my-tweets"){
+
+//I couldn't get this from the keys,js file so I just put it inside my liri.js file
+	var twitterKeys = new Twitter( {
+  consumer_key: 	"1PbnU9cdv0VpEwE6DhcZa8APb",
+  consumer_secret: 'uhzFQeVjY7QUVGSFQItx2pJlkv54wW5crRXDlwcLR283K53gSk',
+  access_token_key: '779772103385948161-mqaC54Xqax90n9bd00MQbOywxUzXveF',
+  access_token_secret: 'MD2DwUE8sDK0aIhpKpWNEI0ilvBAX0cBGzMaVK3ZaLwkD',
+});
+	 
+	var params = {screen_name: 'ETSieversEsq'};
+	
+twitterKeys.get('statuses/user_timeline', params, function(error, tweets, response) {
+  if (!error) {
+    console.log("Latest Tweet: " + tweets[0].text);
+    console.log("Recent Tweet: " + tweets[1].text);
+    console.log("Recent Tweet: " + tweets[2].text);
+    console.log("Recent Tweet: " + tweets[3].text);
+    console.log("Recent Tweet: " + tweets[4].text);
+    console.log("Recent Tweet: " + tweets[5].text);
+	    }
+	  
+	});
 
 };
