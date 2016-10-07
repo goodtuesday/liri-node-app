@@ -101,10 +101,10 @@ else if(process.argv[2]=="my-tweets"){
 
 //I couldn't get this from the keys,js file so I just put it inside my liri.js file
 	var twitterKeys = new Twitter( {
-  consumer_key: 	"1PbnU9cdv0VpEwE6DhcZa8APb",
-  consumer_secret: 'uhzFQeVjY7QUVGSFQItx2pJlkv54wW5crRXDlwcLR283K53gSk',
-  access_token_key: '779772103385948161-mqaC54Xqax90n9bd00MQbOywxUzXveF',
-  access_token_secret: 'MD2DwUE8sDK0aIhpKpWNEI0ilvBAX0cBGzMaVK3ZaLwkD',
+  consumer_key: 	"",
+  consumer_secret: '',
+  access_token_key: '',
+  access_token_secret: '',
 });
 	 
 	var params = {screen_name: 'ETSieversEsq'};
